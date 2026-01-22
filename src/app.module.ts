@@ -8,6 +8,7 @@ import { MedicalRecordsModule } from './medical-records/medical-records.module';
 import { DatabaseConfig } from './config/database.config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { HealthController } from './health.controller';
 
 @Module({
   imports: [
@@ -18,7 +19,7 @@ import { AppService } from './app.service';
     ThrottlerModule.forRoot([
       {
         ttl: 60000, // 1 minute
-        limit: 100, // 100 requests per minute
+        limit: 100, // 100 requests per minute"
       },
     ]),
     TypeOrmModule.forRoot({
@@ -32,6 +33,7 @@ import { AppService } from './app.service';
     BillingModule,
     MedicalRecordsModule,
   ],
+  controllers: [AppController, HealthController],
   controllers: [AppController],
   providers: [AppService],
 })
