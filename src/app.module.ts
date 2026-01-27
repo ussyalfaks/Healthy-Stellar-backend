@@ -57,4 +57,4 @@ import { AuditLogEntity } from './common/audit/audit-log.entity';
     }
   ],
 })
-export class AppModule { }
+export class AppModule {}
