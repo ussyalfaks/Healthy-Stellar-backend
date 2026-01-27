@@ -12,7 +12,6 @@ import { PatientModule } from './patients/patients.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { HealthController } from './health.controller';
 
-
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -23,31 +22,20 @@ import { HealthController } from './health.controller';
     TypeOrmModule.forRootAsync({
       useClass: DatabaseConfig,
     }),
-    CommonModule,
-    BillingModule,
-    MedicalRecordsModule,
-  ],
-  controllers: [AppController],
     // Rate limiting and throttling for security
     ThrottlerModule.forRoot([
       {
         ttl: 60000, // 1 minute
-        limit: 100, // 100 requests per minute"
+        limit: 100, // 100 requests per minute
       },
     ]),
-    TypeOrmModule.forRoot({
-      type: 'sqlite',
-      database: ':memory:',
-      entities: [__dirname + '/**/*.entity{.ts,.js}'],
-      synchronize: true,
-    }),
-    // Authentication module with healthcare compliance
+    CommonModule,
     AuthModule,
     BillingModule,
     MedicalRecordsModule,
-        PatientModule
+    PatientModule,
   ],
   controllers: [AppController, HealthController],
   providers: [AppService],
 })
-export class AppModule { }
+export class AppModule {}
